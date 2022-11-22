@@ -30,7 +30,6 @@ $articles = $databaseConnection->query("SELECT * FROM articles")->fetchAll();
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Content</th>
                     <th scope="col">Enable</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -42,9 +41,8 @@ $articles = $databaseConnection->query("SELECT * FROM articles")->fetchAll();
                     <tr>
                         <th scope="row"><?= $value['id'] ?></th>
                         <td><?= $value['title'] ?></td>
-                        <td>azerty</td>
-                        <td><?= $value['enable'] ?></td>
-                        <td><a href="edit.php?id=<?= $value['id'] ?>">edit</a> | <a href="delete.php?id=<?= $value['id'] ?>">delete</a></td>
+                        <td><?= $value['is_enable'] ? 'Yes' : 'No' ?></td>
+                        <td><a href="edit.php?type=edit&id=<?= $value['id'] ?>">edit</a> | <a href="delete.php?id=<?= $value['id'] ?>">delete</a></td>
                     </tr>
                 <?php
                 }
