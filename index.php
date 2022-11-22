@@ -1,7 +1,5 @@
 <?php
 
-ini_set('display_errors', 'On');
-
 include './DatabaseConnection.php';
 
 $databaseConnection = getDatabaseConnection();
