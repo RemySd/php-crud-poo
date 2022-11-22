@@ -21,7 +21,7 @@ $articles = $databaseConnection->query("SELECT * FROM articles")->fetchAll();
 
 <body>
     <div class="container">
-        <h1>PHP CRUD with POO</h1>
+        <h1>PHP CRUD</h1>
 
         <a href="./edit.php?type=add">Add an article</a>
 

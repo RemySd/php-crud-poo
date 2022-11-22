@@ -49,7 +49,7 @@ if ($_POST) {
 
 <body>
     <div class="container">
-        <h1>PHP CRUD with POO</h1>
+        <h1>PHP CRUD</h1>
 
         <a href="./index.php">Back</a>
 
