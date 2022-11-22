@@ -25,7 +25,6 @@ if ($_POST) {
         $req->bindValue(":is_enable", $_POST["is_enable"]);
         $req->execute();
     } elseif ($_GET["type"] == "edit") {
-        var_dump("okok");
         $req = $databaseConnection->prepare("UPDATE articles SET title=:title, content=:content, is_enable=:is_enable WHERE id = :id");
         $req->bindValue(":id", $_GET["id"], PDO::PARAM_INT);
         $req->bindValue(":title", $_POST["title"], PDO::PARAM_STR);
