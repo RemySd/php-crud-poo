@@ -1,11 +1,8 @@
 <?php
 
-include './DatabaseConnection.php';
+include './ArticleRepository.php';
 
-$databaseConnection = getDatabaseConnection();
-
-$req = $databaseConnection->prepare("DELETE FROM articles WHERE id = :id");
-$req->bindValue(":id", $_GET["id"], PDO::PARAM_INT);
-$req->execute();
+$articleRepository = new ArticleRepository();
+$articles = $articleRepository->delete($_GET['id']);
 
 header('Location: ./index.php');

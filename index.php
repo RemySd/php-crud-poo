@@ -1,10 +1,9 @@
 <?php
 
-include './DatabaseConnection.php';
+include './ArticleRepository.php';
 
-$databaseConnection = getDatabaseConnection();
-
-$articles = $databaseConnection->query("SELECT * FROM articles")->fetchAll();
+$articleRepository = new ArticleRepository();
+$articles = $articleRepository->getAll();
 
 ?>
 

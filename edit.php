@@ -1,34 +1,22 @@
 <?php
 
-include './DatabaseConnection.php';
+include './ArticleRepository.php';
 
-$databaseConnection = getDatabaseConnection();
+$articleRepository = new ArticleRepository();
 
 $article = null;
 
 // Fetch article in edit mode
 if (!empty($_GET['id'])) {
-    $req = $databaseConnection->prepare("SELECT * FROM articles WHERE id = :id");
-    $req->bindValue(":id", $_GET["id"], PDO::PARAM_INT);
-    $req->execute();
-    $article = $req->fetch();
+    $article = $articleRepository->getOne($_GET["id"]);
 }
 
 // Processing form when submitted
 if ($_POST) {
     if ($_GET["type"] == "add") {
-        $req = $databaseConnection->prepare("INSERT INTO articles VALUES (null, :title, :content, :is_enable)");
-        $req->bindValue(":title", $_POST["title"], PDO::PARAM_STR);
-        $req->bindValue(":content", $_POST["content"], PDO::PARAM_STR);
-        $req->bindValue(":is_enable", $_POST["is_enable"]);
-        $req->execute();
+        $articleRepository->create($_POST);
     } elseif ($_GET["type"] == "edit") {
-        $req = $databaseConnection->prepare("UPDATE articles SET title=:title, content=:content, is_enable=:is_enable WHERE id = :id");
-        $req->bindValue(":id", $_GET["id"], PDO::PARAM_INT);
-        $req->bindValue(":title", $_POST["title"], PDO::PARAM_STR);
-        $req->bindValue(":content", $_POST["content"], PDO::PARAM_STR);
-        $req->bindValue(":is_enable", $_POST["is_enable"]);
-        $req->execute();
+        $articleRepository->update($_GET['id'], $_POST);
     }
 
     header('Location: ./index.php');
