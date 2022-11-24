@@ -1,6 +1,6 @@
 <?php
 
-include './ArticleRepository.php';
+include './Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
 $articles = $articleRepository->getAll();
@@ -33,13 +33,13 @@ $articles = $articleRepository->getAll();
             </thead>
             <tbody>
                 <?php
-                foreach ($articles as $value) {
+                foreach ($articles as $article) {
                 ?>
                     <tr>
-                        <th scope="row"><?= $value['id'] ?></th>
-                        <td><?= $value['title'] ?></td>
-                        <td><?= $value['is_enable'] ? 'Yes' : 'No' ?></td>
-                        <td><a href="edit.php?type=edit&id=<?= $value['id'] ?>">edit</a> | <a href="delete.php?id=<?= $value['id'] ?>">delete</a></td>
+                        <th scope="row"><?= $article->getId() ?></th>
+                        <td><?= $article->getTitle()?></td>
+                        <td><?= $article->IsEnable() ? 'Yes' : 'No' ?></td>
+                        <td><a href="edit.php?type=edit&id=<?= $article->getId() ?>">edit</a> | <a href="delete.php?id=<?= $article->getId() ?>">delete</a></td>
                     </tr>
                 <?php
                 }

@@ -1,10 +1,10 @@
 <?php
 
-include './ArticleRepository.php';
+include __DIR__ . '/Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
 
-$article = null;
+$article = new Article([]);
 
 // Fetch article in edit mode
 if (!empty($_GET['id'])) {
@@ -14,9 +14,11 @@ if (!empty($_GET['id'])) {
 // Processing form when submitted
 if ($_POST) {
     if ($_GET["type"] == "add") {
-        $articleRepository->create($_POST);
+        $article->hydrate($_POST);
+        $articleRepository->create($article);
     } elseif ($_GET["type"] == "edit") {
-        $articleRepository->update($_GET['id'], $_POST);
+        $article->hydrate($_POST);
+        $articleRepository->update($article);
     }
 
     header('Location: ./index.php');
@@ -48,15 +50,15 @@ if ($_POST) {
         <form method="POST" action="./edit.php?type=<?= !empty($_GET["type"]) && $_GET["type"] == "add" ? 'add' : 'edit&id=' . $_GET["id"] ?>">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= !empty($article) ? $article["title"] : '' ?>">
+                <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $article->getTitle() ?: '' ?>">
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"><?= !empty($article) ? $article["content"] : '' ?></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"><?= $article->getContent() ?: '' ?></textarea>
             </div>
             <div class="mb-3 form-check">
                 <input type='hidden' value="0" name='is_enable'>
-                <input name="is_enable" value="1" type="checkbox" class="form-check-input" id="is_enable" <?= !empty($article) && $article['is_enable'] == 1 ? 'checked' : '' ?>>
+                <input name="is_enable" value="1" type="checkbox" class="form-check-input" id="is_enable" <?= $article->isEnable() ? 'checked' : '' ?>>
                 <label class="form-check-label" for="is_enable">Enable</label>
             </div>
 
