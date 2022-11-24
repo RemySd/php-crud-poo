@@ -3,9 +3,9 @@
 class Article 
 {
     private int $id;
-    private ?string $title = null;
-    private ?string $content = null;
-    private ?bool $isEnable = null;
+    private string $title;
+    private string $content;
+    private bool $isEnable;
 
     public function __construct(array $data)
     {
@@ -34,7 +34,7 @@ class Article
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -46,7 +46,7 @@ class Article
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -58,7 +58,7 @@ class Article
         return $this;
     }
 
-    public function IsEnable(): ?bool
+    public function IsEnable(): bool
     {
         return $this->isEnable;
     }

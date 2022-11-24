@@ -6,6 +6,8 @@ $articleRepository = new ArticleRepository();
 
 $article = new Article([]);
 
+$isEdit = $_GET["type"] == "add" ? false : true;
+
 // Fetch article in edit mode
 if (!empty($_GET['id'])) {
     $article = $articleRepository->getOne($_GET["id"]);
@@ -50,15 +52,15 @@ if ($_POST) {
         <form method="POST" action="./edit.php?type=<?= !empty($_GET["type"]) && $_GET["type"] == "add" ? 'add' : 'edit&id=' . $_GET["id"] ?>">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $article->getTitle() ?: '' ?>">
+                <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $isEdit ? $article->getTitle() : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"><?= $article->getContent() ?: '' ?></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"><?= $isEdit ? $article->getContent() : '' ?></textarea>
             </div>
             <div class="mb-3 form-check">
                 <input type='hidden' value="0" name='is_enable'>
-                <input name="is_enable" value="1" type="checkbox" class="form-check-input" id="is_enable" <?= $article->isEnable() ? 'checked' : '' ?>>
+                <input name="is_enable" value="1" type="checkbox" class="form-check-input" id="is_enable" <?= $isEdit ? ($article->isEnable() ? 'checked' : '') : '' ?>>
                 <label class="form-check-label" for="is_enable">Enable</label>
             </div>
 

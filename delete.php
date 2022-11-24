@@ -3,6 +3,7 @@
 include './Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
-$articles = $articleRepository->delete($articleRepository->getOne($_GET['id']));
+$articleToRemove = $articleRepository->getOne($_GET['id']);
+$articles = $articleRepository->delete($articleToRemove);
 
 header('Location: ./index.php');
