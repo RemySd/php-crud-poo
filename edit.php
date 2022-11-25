@@ -44,7 +44,7 @@ if ($_POST) {
         <a href="./index.php">Back</a>
 
         <?php
-        if (!empty($_GET["type"]) && $_GET["type"] == "add") {
+        if (!$isEdit) {
             echo '<p>New article form</p>';
         }
         ?>
@@ -66,7 +66,7 @@ if ($_POST) {
 
             
             <button type="submit" class="btn btn-primary">
-                <?=$_GET["type"] == "add" ? 'Add' : 'Edit' ?>
+                <?=$isEdit ? 'Edit' : 'Add' ?>
             </button>
         </form>
     </div>
