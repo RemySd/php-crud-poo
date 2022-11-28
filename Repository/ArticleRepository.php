@@ -5,11 +5,13 @@ include __DIR__ . './../Entities/Article.php';
 
 class ArticleRepository extends Repository
 {
-    public function getAll(): array
+    public function getAll($page = 1): array
     {
+        $offset = 5 * ($page - 1);
+
         $datas = $this
             ->database
-            ->query("SELECT * FROM articles")
+            ->query("SELECT * FROM articles LIMIT 5 OFFSET $offset")
             ->fetchAll();
 
         $articles = [];

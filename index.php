@@ -3,7 +3,7 @@
 include './Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
-$articles = $articleRepository->getAll();
+$articles = $articleRepository->getAll(intval($_GET["page"]));
 
 ?>
 
@@ -46,6 +46,10 @@ $articles = $articleRepository->getAll();
                 ?>
             </tbody>
         </table>
+        <a href="./index.php?page=<?= isset($_GET["page"]) ? intval($_GET["page"])-1 : '' ?>">Go page <?= isset($_GET["page"]) ? intval($_GET["page"])-1 : '' ?></a>
+        <p><?= isset($_GET["page"]) ? $_GET["page"] : '' ?></p>
+        <a href="./index.php?page=<?= isset($_GET["page"]) ? intval($_GET["page"])+1 : '' ?>">Go page <?= isset($_GET["page"]) ? intval($_GET["page"])+1 : '' ?></a>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

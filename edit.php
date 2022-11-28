@@ -15,11 +15,11 @@ if (!empty($_GET['id'])) {
 
 // Processing form when submitted
 if ($_POST) {
+    $article->hydrate($_POST);
+    
     if ($_GET["type"] == "add") {
-        $article->hydrate($_POST);
         $articleRepository->create($article);
     } elseif ($_GET["type"] == "edit") {
-        $article->hydrate($_POST);
         $articleRepository->update($article);
     }
 
@@ -49,7 +49,7 @@ if ($_POST) {
         }
         ?>
 
-        <form method="POST" action="./edit.php?type=<?= !empty($_GET["type"]) && $_GET["type"] == "add" ? 'add' : 'edit&id=' . $_GET["id"] ?>">
+        <form method="POST">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $isEdit ? $article->getTitle() : '' ?>">
@@ -63,8 +63,6 @@ if ($_POST) {
                 <input name="is_enable" value="1" type="checkbox" class="form-check-input" id="is_enable" <?= $isEdit ? ($article->isEnable() ? 'checked' : '') : '' ?>>
                 <label class="form-check-label" for="is_enable">Enable</label>
             </div>
-
-            
             <button type="submit" class="btn btn-primary">
                 <?=$isEdit ? 'Edit' : 'Add' ?>
             </button>
