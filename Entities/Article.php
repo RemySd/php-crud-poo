@@ -3,8 +3,11 @@
 class Article
 {
     private int $id;
+
     private string $title;
+
     private string $content;
+    
     private bool $isEnable;
 
     public function __construct(array $data)
