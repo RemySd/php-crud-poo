@@ -10,7 +10,7 @@ class Article
 
     private bool $isEnable;
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
     }
@@ -19,7 +19,7 @@ class Article
     {
         foreach ($data as $key => $value) {
             $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-            if (is_callable(array($this, $method))) {
+            if (is_callable([$this, $method])) {
                 $this->$method($value);
             }
         }
@@ -54,7 +54,7 @@ class Article
         return $this->content;
     }
 
-    
+
     public function setContent($content): self
     {
         $this->content = $content;

@@ -5,22 +5,21 @@ require_once __ROOT__ . '/Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
 
-$article = new Article([]);
+$id = empty($_GET['id']) ? null : $_GET['id'];
+$article = new Article();
 
-$isEdit = $_GET["type"] == "add" ? false : true;
-
-// Fetch article in edit mode
-if (empty($_GET['id']) === false) {
+if ($id) {
     $article = $articleRepository->getOne($_GET["id"]);
 }
 
-// Processing form when submitted
+$isEdit = empty($id) ? false : true;
+
 if ($_POST) {
-    if (!empty($_GET['type']) && $_GET['type'] == "add") {
-        $article->hydrate($_POST);
+    $article->hydrate($_POST);
+
+    if (!$isEdit) {
         $articleRepository->create($article);
-    } elseif (!empty($_GET['type']) && $_GET["type"] == "edit") {
-        $article->hydrate($_POST);
+    } else {
         $articleRepository->update($article);
     }
 
@@ -48,9 +47,9 @@ if ($_POST) {
         if (!$isEdit) {
             echo '<p>New article form</p>';
         }
-?>
+        ?>
 
-        <form method="POST" action="./edit.php?type=<?= !empty($_GET["type"]) && $_GET["type"] == "add" ? 'add' : 'edit&id=' . $_GET["id"] ?>">
+        <form method="POST" action="./edit.php<?= $isEdit ? "?id={$id}" : '' ?>">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $isEdit ? $article->getTitle() : '' ?>">
@@ -65,9 +64,8 @@ if ($_POST) {
                 <label class="form-check-label" for="is_enable">Enable</label>
             </div>
 
-            
             <button type="submit" class="btn btn-primary">
-                <?=$isEdit ? 'Edit' : 'Add' ?>
+                <?= $isEdit ? 'Edit' : 'Add' ?>
             </button>
         </form>
     </div>
