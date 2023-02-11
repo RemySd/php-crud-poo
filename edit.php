@@ -47,7 +47,7 @@ if ($_POST) {
         if (!$isEdit) {
             echo '<p>New article form</p>';
         }
-        ?>
+?>
 
         <form method="POST" action="./edit.php?type=<?= !empty($_GET["type"]) && $_GET["type"] == "add" ? 'add' : 'edit&id=' . $_GET["id"] ?>">
             <div class="mb-3">

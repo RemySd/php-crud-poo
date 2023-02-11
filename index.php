@@ -34,7 +34,7 @@ $articles = $articleRepository->getAll();
             <tbody>
                 <?php
                 foreach ($articles as $article) {
-                ?>
+                    ?>
                     <tr>
                         <th scope="row"><?= $article->getId() ?></th>
                         <td><?= $article->getTitle()?></td>
@@ -43,7 +43,7 @@ $articles = $articleRepository->getAll();
                     </tr>
                 <?php
                 }
-                ?>
+?>
             </tbody>
         </table>
     </div>

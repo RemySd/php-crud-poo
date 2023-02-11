@@ -25,7 +25,7 @@ class ArticleRepository extends Repository
     {
         $req = $this->database->prepare("SELECT * FROM articles WHERE id = :id");
         $req->bindValue(":id", $id, PDO::PARAM_INT);
-        $req->execute();  
+        $req->execute();
 
         $article = new Article($req->fetch());
 
@@ -37,7 +37,7 @@ class ArticleRepository extends Repository
         $req = $this->database->prepare("INSERT INTO articles VALUES (null, :title, :content, :is_enable)");
         $req->bindValue(":title", $article->getTitle(), PDO::PARAM_STR);
         $req->bindValue(":content", $article->getContent(), PDO::PARAM_STR);
-        $req->bindValue(":is_enable", $article->isEnable()? '1' : '0');
+        $req->bindValue(":is_enable", $article->isEnable() ? '1' : '0');
         $req->execute();
     }
 
@@ -47,7 +47,7 @@ class ArticleRepository extends Repository
         $req->bindValue(":id", $article->getId(), PDO::PARAM_INT);
         $req->bindValue(":title", $article->getTitle(), PDO::PARAM_STR);
         $req->bindValue(":content", $article->getContent(), PDO::PARAM_STR);
-        $req->bindValue(":is_enable", $article->isEnable()? '1' : '0');
+        $req->bindValue(":is_enable", $article->isEnable() ? '1' : '0');
         $req->execute();
     }
 
