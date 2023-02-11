@@ -43,11 +43,9 @@ if ($_POST) {
 
         <a href="./index.php">Back</a>
 
-        <?php
-        if (!$isEdit) {
-            echo '<p>New article form</p>';
-        }
-        ?>
+        <?php if (!$isEdit) : ?>
+            <p>New article form</p>
+        <?php endif; ?>
 
         <form method="POST" action="./edit.php<?= $isEdit ? "?id={$id}" : '' ?>">
             <div class="mb-3">
