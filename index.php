@@ -34,16 +34,16 @@ $articles = $articleRepository->getAll();
             <tbody>
                 <?php
                 foreach ($articles as $article) {
-                    ?>
+                ?>
                     <tr>
                         <th scope="row"><?= $article->getId() ?></th>
-                        <td><?= $article->getTitle()?></td>
+                        <td><?= $article->getTitle() ?></td>
                         <td><?= $article->IsEnable() ? 'Yes' : 'No' ?></td>
                         <td><a href="edit.php?type=edit&id=<?= $article->getId() ?>">edit</a> | <a href="delete.php?id=<?= $article->getId() ?>">delete</a></td>
                     </tr>
                 <?php
                 }
-?>
+                ?>
             </tbody>
         </table>
     </div>
