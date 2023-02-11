@@ -47,14 +47,14 @@ if ($_POST) {
             <p>New article form</p>
         <?php endif; ?>
 
-        <form method="POST" action="./edit.php<?= $isEdit ? "?id={$id}" : '' ?>">
+        <form method="POST" action="./edit.php<?= $isEdit ? '?id=' . htmlspecialchars($id) : '' ?>">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $isEdit ? $article->getTitle() : '' ?>">
+                <input name="title" id="title" type="text" class="form-control" aria-describedby="emailHelp" value="<?= $isEdit ? htmlspecialchars($article->getTitle()) : '' ?>">
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"><?= $isEdit ? $article->getContent() : '' ?></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"><?= $isEdit ? htmlspecialchars($article->getContent()) : '' ?></textarea>
             </div>
             <div class="mb-3 form-check">
                 <input type='hidden' value="0" name='is_enable'>

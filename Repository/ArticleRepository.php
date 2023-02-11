@@ -14,7 +14,7 @@ class ArticleRepository extends Repository
 
         $articles = [];
 
-        foreach ($datas as $key => $value) {
+        foreach ($datas as $value) {
             $articles[] = new Article($value);
         }
 
