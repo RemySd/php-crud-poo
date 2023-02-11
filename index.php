@@ -37,7 +37,7 @@ $articles = $articleRepository->getAll();
                         <th scope="row"><?= esc_html($article->getId()) ?></th>
                         <td><?= esc_html($article->getTitle()) ?></td>
                         <td><?= $article->IsEnable() ? 'Yes' : 'No' ?></td>
-                        <td><a href="edit.php?type=edit&id=<?= $article->getId() ?>">edit</a> | <a href="delete.php?id=<?= esc_html($article->getId()) ?>">delete</a></td>
+                        <td><a href="edit.php?type=edit&id=<?= esc_html($article->getId()) ?>">edit</a> | <a href="delete.php?id=<?= esc_html($article->getId()) ?>">delete</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
