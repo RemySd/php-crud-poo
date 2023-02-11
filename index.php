@@ -1,10 +1,10 @@
 <?php
 
-include './Repository/ArticleRepository.php';
+require_once 'config.php';
+require_once './Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
 $articles = $articleRepository->getAll();
-
 ?>
 
 <!DOCTYPE html>

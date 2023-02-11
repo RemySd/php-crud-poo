@@ -1,6 +1,7 @@
 <?php
 
-include __DIR__ . '/Repository/ArticleRepository.php';
+require_once 'config.php';
+require_once __ROOT__ . '/Repository/ArticleRepository.php';
 
 $articleRepository = new ArticleRepository();
 
@@ -9,16 +10,16 @@ $article = new Article([]);
 $isEdit = $_GET["type"] == "add" ? false : true;
 
 // Fetch article in edit mode
-if (!empty($_GET['id'])) {
+if (empty($_GET['id']) === false) {
     $article = $articleRepository->getOne($_GET["id"]);
 }
 
 // Processing form when submitted
 if ($_POST) {
-    if ($_GET["type"] == "add") {
+    if (!empty($_GET['type']) && $_GET['type'] == "add") {
         $article->hydrate($_POST);
         $articleRepository->create($article);
-    } elseif ($_GET["type"] == "edit") {
+    } elseif (!empty($_GET['type']) && $_GET["type"] == "edit") {
         $article->hydrate($_POST);
         $articleRepository->update($article);
     }

@@ -1,10 +1,12 @@
 <?php
 
-include __DIR__ . '/Repository.php';
-include __DIR__ . './../Entities/Article.php';
+require_once __ROOT__ . '/Repository/Repository.php';
+require_once __ROOT__ . '/Entities/Article.php';
 
 class ArticleRepository extends Repository
 {
+
+
     public function getAll(): array
     {
         $datas = $this
@@ -21,6 +23,7 @@ class ArticleRepository extends Repository
         return $articles;
     }
 
+
     public function getOne(int $id): Article
     {
         $req = $this->database->prepare("SELECT * FROM articles WHERE id = :id");
@@ -32,14 +35,18 @@ class ArticleRepository extends Repository
         return $article;
     }
 
+
     public function create(Article $article): void
     {
+        $isEnable = $article->isEnable() ? '1' : '0';
+
         $req = $this->database->prepare("INSERT INTO articles VALUES (null, :title, :content, :is_enable)");
         $req->bindValue(":title", $article->getTitle(), PDO::PARAM_STR);
         $req->bindValue(":content", $article->getContent(), PDO::PARAM_STR);
-        $req->bindValue(":is_enable", $article->isEnable() ? '1' : '0');
+        $req->bindValue(":is_enable", $isEnable);
         $req->execute();
     }
+
 
     public function update(Article $article): void
     {
@@ -50,6 +57,7 @@ class ArticleRepository extends Repository
         $req->bindValue(":is_enable", $article->isEnable() ? '1' : '0');
         $req->execute();
     }
+
 
     public function delete(Article $article): void
     {
