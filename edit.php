@@ -9,7 +9,7 @@ $id = empty($_GET['id']) ? null : $_GET['id'];
 $article = new Article();
 
 if ($id) {
-    $article = $articleRepository->getOne($_GET["id"]);
+    $article = $articleRepository->getOne($id);
 }
 
 $isEdit = empty($id) ? false : true;
