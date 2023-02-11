@@ -5,8 +5,6 @@ require_once __ROOT__ . '/Entities/Article.php';
 
 class ArticleRepository extends Repository
 {
-
-
     public function getAll(): array
     {
         $datas = $this

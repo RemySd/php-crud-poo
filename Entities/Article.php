@@ -7,7 +7,7 @@ class Article
     private string $title;
 
     private string $content;
-    
+
     private bool $isEnable;
 
     public function __construct(array $data)
@@ -54,6 +54,7 @@ class Article
         return $this->content;
     }
 
+    
     public function setContent($content): self
     {
         $this->content = $content;
@@ -61,10 +62,12 @@ class Article
         return $this;
     }
 
+
     public function IsEnable(): bool
     {
         return $this->isEnable;
     }
+
 
     public function setIsEnable($isEnable): self
     {
